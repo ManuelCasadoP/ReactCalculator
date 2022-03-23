@@ -5,8 +5,9 @@ function App() {
   const [ firstNumber, setFirstNumber ] = useState("");
   const [ secondNumber, setSecondNumber ] = useState("");
   const [ result, setResult ] = useState("");
+  const [ history, setHistory] = useState([]);
   const memory = useRef("");
-  
+    
   function changeFirstNumberHandler (event) {
     setFirstNumber(parseFloat(event.target.value));
   }
@@ -16,7 +17,7 @@ function App() {
   }
 
   function addHandler (event){
-    setResult(firstNumber + secondNumber);    
+    setResult(firstNumber + secondNumber);  
   }
   
   function subtractHandler (event){
@@ -54,6 +55,24 @@ function App() {
     console.log("secondNumber state:", secondNumber);
     console.log("Result: ",result);
   }
+
+  function addNewItemToHistory () {
+    const actualHistory = Array.from(history);
+    actualHistory.push(result);
+    setHistory(actualHistory);
+    
+  }
+
+  const firstRender = useRef(true);
+
+  useEffect(
+    ()=>{
+      if (firstRender===true){
+            firstRender=false 
+      } else {
+            addNewItemToHistory();
+    }}, [result]
+  )
   
   useEffect(
     ()=>{
