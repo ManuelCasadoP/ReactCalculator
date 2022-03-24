@@ -6,7 +6,7 @@ function App() {
   const [ secondNumber, setSecondNumber ] = useState("");
   const [ result, setResult ] = useState("");
   const [ history, setHistory] = useState([]);
-  const memory = useRef("");
+  const memory = useRef(0);
     
   function changeFirstNumberHandler (event) {
     setFirstNumber(parseFloat(event.target.value));
@@ -17,19 +17,19 @@ function App() {
   }
 
   function addHandler (event){
-    setResult(firstNumber + secondNumber);  
+    setResult(parseFloat(firstNumber + secondNumber));  
   }
   
   function subtractHandler (event){
-    setResult(firstNumber - secondNumber);    
+    setResult(parseFloat(firstNumber - secondNumber));    
   }
   
   function multiplyHandler (event){
-    setResult(firstNumber * secondNumber);    
+    setResult(parseFloat(firstNumber * secondNumber));    
   }
   
   function divideHandler (event){
-    setResult(firstNumber / secondNumber);    
+    setResult(parseFloat(firstNumber / secondNumber));    
   }
 
   function deleteHandler(event){
@@ -39,48 +39,42 @@ function App() {
   }
 
   function addToMemoryHandler (event){
-    memory.current=(parseFloat(memory.current+result));  
+    memory.current=(parseFloat(memory.current) + parseFloat(result)); 
+    
   }
 
   function memoryRecoverHandler (event){
     setFirstNumber("");
     setSecondNumber("");
     setResult("");
-    setFirstNumber(memory.current);    
+       
   }
 
+  function memoryClearHandler (event){
+    memory.current = 0;
+ }
 
-  function showResult(event){
-    console.log("firstNumber state:", firstNumber);
-    console.log("secondNumber state:", secondNumber);
-    console.log("Result: ",result);
-  }
 
   function addNewItemToHistory () {
     const actualHistory = Array.from(history);
-    actualHistory.push(result);
-    setHistory(actualHistory);
-    
+    if ({result} === isNaN){  }
+    else {   
+      actualHistory.push(parseFloat(result));
+      setHistory(actualHistory);
+    }
   }
 
   const firstRender = useRef(true);
 
   useEffect(
     ()=>{
-      if (firstRender===true){
-            firstRender=false 
-      } else {
+      if (firstRender.current===true){
+            firstRender.current=false }
+      else {
             addNewItemToHistory();
-    }}, [result]
+    }}, [(result)]
   )
   
-  useEffect(
-    ()=>{
-      showResult();
-        
-    }
-  )
-
   return (
     <>
       <h1>Calculadora</h1>
@@ -96,10 +90,10 @@ function App() {
       <br/>
       <button onClick={addToMemoryHandler}>M+</button>
       <button onClick={memoryRecoverHandler}>MR</button>
+      <button onClick={memoryClearHandler}>MC</button>
       <br/>
       <p>{result}</p>
-      <p>{memory.current}</p>
-
+      
     </>
   );
 }
