@@ -17,19 +17,19 @@ function App() {
   }
 
   function addHandler (event){
-    setResult(parseFloat(firstNumber + secondNumber));  
+    setResult(firstNumber + secondNumber);  
   }
   
   function subtractHandler (event){
-    setResult(parseFloat(firstNumber - secondNumber));    
+    setResult(firstNumber - secondNumber);    
   }
   
   function multiplyHandler (event){
-    setResult(parseFloat(firstNumber * secondNumber));    
+    setResult(firstNumber * secondNumber);    
   }
   
   function divideHandler (event){
-    setResult(parseFloat(firstNumber / secondNumber));    
+    setResult (firstNumber / secondNumber);    
   }
 
   function deleteHandler(event){
@@ -39,7 +39,7 @@ function App() {
   }
 
   function addToMemoryHandler (event){
-    memory.current=(parseFloat(memory.current) + parseFloat(result)); 
+    memory.current=(memory.current+result); 
     
   }
 
@@ -59,7 +59,7 @@ function App() {
     const actualHistory = Array.from(history);
     if ({result} === isNaN){  }
     else {   
-      actualHistory.push(parseFloat(result));
+      actualHistory.push(result);
       setHistory(actualHistory);
     }
   }
