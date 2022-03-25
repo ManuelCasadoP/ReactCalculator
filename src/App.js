@@ -17,19 +17,19 @@ function App() {
   }
 
   function addHandler (event){
-    setResult(firstNumber + secondNumber);  
+    setResult(parseFloat(firstNumber + secondNumber));  
   }
   
   function subtractHandler (event){
-    setResult(firstNumber - secondNumber);    
+    setResult(parseFloat(firstNumber - secondNumber));    
   }
   
   function multiplyHandler (event){
-    setResult(firstNumber * secondNumber);    
+    setResult(parseFloat(firstNumber * secondNumber));    
   }
   
   function divideHandler (event){
-    setResult (firstNumber / secondNumber);    
+    setResult(parseFloat(firstNumber / secondNumber));    
   }
 
   function deleteHandler(event){
@@ -38,7 +38,7 @@ function App() {
   }
 
   function addToMemoryHandler (event){
-    memory.current=(memory.current+result); 
+    memory.current=(parseFloat(memory.current+result)); 
     
   }
 
@@ -63,6 +63,14 @@ function App() {
     }
   }
 
+  /*
+  function printHistory(){
+    const historyBuffer = history.map(
+      (item) => <p>{item}</p>
+    );
+  }
+*/
+
   const firstRender = useRef(true);
 
   useEffect(
@@ -71,6 +79,7 @@ function App() {
             firstRender.current=false }
       else {
             addNewItemToHistory();
+            deleteHandler();
     }}, [(result)]
   )
   
@@ -95,6 +104,23 @@ function App() {
       
     </>
   );
+
+  /*
+useEffect(
+    ()=>{
+      printHistory();
+
+    }, [(history)]
+  )
+  return (
+    <>     
+      <h1>Historial</h1>
+      {historyBuffer}
+    </>
+  );
+*/
+
+
 }
 
 export default App;
