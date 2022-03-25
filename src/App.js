@@ -35,7 +35,6 @@ function App() {
   function deleteHandler(event){
     setFirstNumber("");
     setSecondNumber("");
-    setResult("");
   }
 
   function addToMemoryHandler (event){
@@ -44,13 +43,13 @@ function App() {
   }
 
   function memoryRecoverHandler (event){
-    setFirstNumber("");
+    setFirstNumber(memory.current);
     setSecondNumber("");
-    setResult("");
-       
   }
 
   function memoryClearHandler (event){
+    setFirstNumber("");
+    setSecondNumber("");
     memory.current = 0;
  }
 
