@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import History from './componentes/History/History.jsx';
 
 function App() {
   const [ firstNumber, setFirstNumber ] = useState("");
@@ -7,6 +8,7 @@ function App() {
   const [ result, setResult ] = useState("");
   const [ history, setHistory] = useState([]);
   const memory = useRef(0);
+  const firstRender = useRef(true);
     
   function changeFirstNumberHandler (event) {
     setFirstNumber(parseFloat(event.target.value));
@@ -63,16 +65,6 @@ function App() {
     }
   }
 
-  /*
-  function printHistory(){
-    const historyBuffer = history.map(
-      (item) => <p>{item}</p>
-    );
-  }
-*/
-
-  const firstRender = useRef(true);
-
   useEffect(
     ()=>{
       if (firstRender.current===true){
@@ -82,7 +74,7 @@ function App() {
             deleteHandler();
     }}, [(result)]
   )
-  
+
   return (
     <>
       <h1>Calculadora</h1>
@@ -101,25 +93,9 @@ function App() {
       <button onClick={memoryClearHandler}>MC</button>
       <br/>
       <p>{result}</p>
-      
+      <History historyArray={history}/>
     </>
   );
-
-  /*
-useEffect(
-    ()=>{
-      printHistory();
-
-    }, [(history)]
-  )
-  return (
-    <>     
-      <h1>Historial</h1>
-      {historyBuffer}
-    </>
-  );
-*/
-
 
 }
 
